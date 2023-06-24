@@ -40,7 +40,7 @@ export default function Navbar() {
             
             <Link to="/"><MdHomeWork size={23}/><li className='px-1 list-none text-black'>Home</li></Link>
             
-            <Link to="/listhotels"><BsFillBuildingFill size={23}/><li className='px-1 list-none text-black'>Hotels</li></Link>
+            <Link to="/listhotels"><BsFillBuildingFill size={23}/><li className='px-1 list-none text-black'>Properties</li></Link>
 
         </div> 
 

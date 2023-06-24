@@ -7,16 +7,27 @@ import { toast, Toaster } from 'react-hot-toast'
 import Travel from '../../images/travel-login.png'
 import Background from '../../images/trylogin.jpg'
 import './account.css'
+import { useLocation } from 'react-router-dom'
 
 function Login() {
     // const {count} = useSelector((state)=>state.auth)
     // const dispatch = useDispatch()
     const response = getLocal()
     const history = useNavigate()
+    const location = useLocation()
+
+    let state = location.state
 
     useEffect(() => {
         if (response) {
             history('/')
+        }
+        if (state?.msg){
+          toast.success(state?.msg)
+          history(state=>({...state,msg:null}))
+        }
+        if (state?.msgerror){
+          toast.error(state?.msgerror)
         }
     },[])
 

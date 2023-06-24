@@ -1,16 +1,16 @@
 import React from 'react'
-import Navbar from '../../components/user/Navbar'
-import Resort1 from '../../images/resort22.webp'
-import { Tabs, TabsHeader, Tab, TabPanel, TabsBody } from '@material-tailwind/react'
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios'
-import { BASE_URL } from '../../utils/config'
-import { details } from '../../utils/config';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../utils/config';
+import axios from 'axios'
+import Sidebar from '../../components/admin/Sidebar';
+import { details } from '../../utils/config';
+import { Tabs, TabsHeader, Tab, TabPanel, TabsBody } from '@material-tailwind/react'
 
-export default function SingleProperty() {
+
+export default function AdminSingleproperty() {
     const navigate = useNavigate()
     const property_id = useParams()
     const [SingleProperty, setSinglePropertye] = useState({})
@@ -27,14 +27,8 @@ export default function SingleProperty() {
 
     }
 
-    async function goCheckout(){
-        navigate(`/checkout/${SingleProperty.id}`)
-    }
-
-
   return (
     <div className='w-full h-screen'>
-      <Navbar/>
       <div className='w-full flex flex-row place-content-center'>
         <div class="grid mt-5 ml-5 w-3/6 place-content-center place-items-center gap-4">
             <div>
@@ -64,8 +58,8 @@ export default function SingleProperty() {
             <div className='flex flex-col pb-10'>
                 <p className='text-md pt-2'>{SingleProperty.address}</p>
                 <div className='flex gap-4 flex-col w-full  pt-8'>
-                    <button className='bg-blue-50 rounded-lg text-center px-5 py-2 text-black font-bold'>Check Availibility</button>
-                    <button className='bg-blue-50 rounded-lg text-center px-5 py-2 text-black font-bold' onClick={()=>goCheckout()}>Reserve</button>
+                    <button className='bg-blue-50 rounded-lg text-center px-5 py-2 text-black font-bold'>Pool Available</button>
+                    <button className='bg-blue-50 rounded-lg text-center px-5 py-2 text-black font-bold'>WiFi Available</button>
                 </div>
             </div>
         </div>

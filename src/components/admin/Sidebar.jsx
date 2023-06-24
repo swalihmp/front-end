@@ -32,11 +32,11 @@ export default function Sidebar() {
             </NavLink>
             <NavLink to="/ahotel" className={({isActive})=>(isActive ? 'bg-cards rounded-xl flex place-items-center text-white my-2' : 'flex place-items-center bg-white-10 my-2')}>
                 <AiOutlineUser size={50} className='px-3 '></AiOutlineUser>
-                <h3 className='font-semibold '>Hotels</h3>
+                <h3 className='font-semibold '>Properties</h3>
             </NavLink>
-            <NavLink to="/Admininstructor" className={({isActive})=>(isActive ? 'bg-cards rounded-xl flex place-items-center text-white my-2' : 'flex place-items-center bg-white-10 my-2')}>
+            <NavLink to="/reservations" className={({isActive})=>(isActive ? 'bg-cards rounded-xl flex place-items-center text-white my-2' : 'flex place-items-center bg-white-10 my-2')}>
                 <SlGraduation size={50} className='px-3'></SlGraduation>
-                <h3 className='font-semibold'>Bookings</h3>
+                <h3 className='font-semibold'>Reservations</h3>
             </NavLink>
 
 

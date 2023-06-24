@@ -96,7 +96,8 @@ export default function Checkout() {
         let bodyData = new FormData();
     
         // we will pass the amount and product name to the backend using form data
-    
+        
+        bodyData.append("property",property_id.id)
         bodyData.append("amount", total)
         bodyData.append("user", user_name.user_id)
         bodyData.append("fname",fname)

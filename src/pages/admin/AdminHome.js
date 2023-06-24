@@ -3,8 +3,33 @@ import Sidebar from '../../components/admin/Sidebar'
 import { Toaster } from 'react-hot-toast'
 import {BiHomeAlt2} from 'react-icons/bi'
 import {BsBook} from 'react-icons/bs'
+import axios from 'axios'
+import { BASE_URL } from '../../utils/config'
+import { useState,useEffect } from 'react';
 
 export default function AdminHome() {
+
+  const [Property, setProperty] = useState([])
+  const [Order, setOrder] = useState([])
+  const [total,setTotal] = useState('')
+
+
+  async function getProperty() {
+      const response = await axios.get(`${BASE_URL}/property/getproperty/`)
+      const response1 = await axios.get(`${BASE_URL}/payment/getorders/`)
+      setProperty(response.data)
+      const total = response1.data.reduce((acc,curr) => {
+        acc = acc + parseInt(curr.order_amount)
+        return acc
+      },0);
+      setTotal(total)
+      setOrder(response1.data.slice(0,4))
+  }
+
+  useEffect(()=>{
+      getProperty();
+  }, [])
+
   return (
     <div className='flex bg-acontent'>
         <Sidebar/>
@@ -19,7 +44,7 @@ export default function AdminHome() {
                  <div className="w-full h-full flex flex-col gap-3 place-content-center">
                   <h3 className='text-white font-semibold text-xl'>Total Hotels</h3>
                   <div className='flex place-content-between'>
-                    <h4 className='font-semibold text-white text-2xl'>15</h4>
+                    <h4 className='font-semibold text-white text-2xl'>{Property.length}</h4>
                     <BiHomeAlt2 size={30} className=' text-white'></BiHomeAlt2>
                   </div>
                   
@@ -29,7 +54,7 @@ export default function AdminHome() {
                 <div className="w-full h-full flex flex-col gap-3 place-content-center">
                     <h3 className='text-white font-semibold text-xl'>Total Bookings</h3>
                     <div className='flex place-content-between'>
-                      <h4 className='font-semibold text-white text-2xl'>15</h4>
+                      <h4 className='font-semibold text-white text-2xl'>{Order.length}</h4>
                       <BsBook size={30} className=' text-white'></BsBook>
                     </div>
                     
@@ -39,7 +64,7 @@ export default function AdminHome() {
                 <div className="w-full h-full flex flex-col gap-3 place-content-center">
                     <h3 className='text-white font-semibold text-xl'>Total Revenue</h3>
                     <div className='flex place-content-between'>
-                      <h4 className='font-semibold text-white text-2xl'>15000/-</h4>
+                      <h4 className='font-semibold text-white text-2xl'>{total}/-</h4>
                       <BiHomeAlt2 size={30} className=' text-white'></BiHomeAlt2>
                     </div>
                     
@@ -58,40 +83,39 @@ export default function AdminHome() {
               <tr>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">SI No.</th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">Booking Id</th>
-                  <th scope="col" class="px-6 py-4 font-medium text-gray-900">Hotel</th>
+                  <th scope="col" class="px-6 py-4 font-medium text-gray-900">Property</th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">Customer</th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900 ">Date</th>
                   <th scope="col" class="px-6 py-4 font-medium text-gray-900">Status</th>
-                  <th scope="col" class="px-6 py-4 font-medium text-gray-900">Action</th>
               </tr>
               </thead>
               <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+              {
+                Order?.map((order,index)=>(
                 <tr class="hover:bg-gray-50">
                     <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
                       <div class="px-6 py-4">
-                          <p>1</p>
+                          <p>{index+1}</p>
                       </div>
                     </th>
                     <td class="px-6 py-4">
-                      <p>fdghfd dfgfdg fdg</p>
+                      <p>{order.order_id}</p>
                     </td>
                     <td class="px-6 py-4">
-                        <p>fdghfd dfgfdg fdg</p>
+                        <p>{order.property?.name}</p>
                     </td>
                     <td class="px-6 py-4">
-                        <p>fdghfd dfgfdg fdg</p>
+                        <p>{order.order_user?.username}</p>
                     </td>
                     <td class="px-6 py-4">
-                        <p>fdghfd dfgfdg fdg</p>
+                        <p>{order.order_date}</p>
                     </td>
                     <td class="px-6 py-4">
-                        <p>fdghfd dfgfdg fdg</p>
-                    </td>
-                    <td class="px-6 py-4">
-                        <p>fdghfd dfgfdg fdg</p>
-                    </td>
-                    
+                        <p>Success</p>
+                    </td>                  
                 </tr>
+                ))
+              }
               </tbody>
               </table>
                   

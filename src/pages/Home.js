@@ -40,7 +40,7 @@ function Home() {
               </h1>
               <p className='text-md text-white'>Find the best hotels and places to visit near you in a single click with atractive price and offers.</p>
               <div className="w-full place-content-center flex py-2">
-                <Link to="/courses" className='bg-blue-50 text-black font-semibold py-3 px-8 lg:px-5 lg:py-2 shadow-xl rounded-lg '>Properties</Link>
+                <Link to="/listhotels" className='bg-blue-50 text-black font-semibold py-3 px-8 lg:px-5 lg:py-2 shadow-xl rounded-lg '>Properties</Link>
               </div>
             </div>
         </div>

@@ -6,10 +6,10 @@ function Footer() {
     <div className='w-full bg-black p-5 rounded-2xl '>
         <div className="flex gap-3 place-content-center">
             <Link to="/" className='text-white list-none text-xl'>Home</Link>
-            <Link to="/courses" className='text-white list-none text-xl'>Hotels</Link>
+            <Link to="/listhotels" className='text-white list-none text-xl'>Hotels</Link>
         </div>
         <div className="w-full flex place-content-center">
-            <p className='text-md text-gray-600'>© 2023 ELearn. Education Private Limited. All rights reserved</p>
+            <p className='text-md text-gray-600'>© 2023 BookEaze. Private Limited. All rights reserved</p>
         </div>
     </div>
   )

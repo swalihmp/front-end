@@ -11,6 +11,8 @@ import axios from 'axios'
 import { BASE_URL } from '../../utils/config'
 import { details } from '../../utils/config'
 import EditProperty from './EditProperty'
+import { AiOutlineDelete } from 'react-icons/ai';
+import Swal from 'sweetalert2';
 
 
 export default function Hotels() {
@@ -40,6 +42,26 @@ export default function Hotels() {
         }
     }, [])
 
+
+    function deleteItem(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Remove Property..!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`${BASE_URL}/property/delete/${id}`).then(
+                    getProperty()
+                )
+                getProperty();
+                toast.success("Removed")
+            }
+          })
+    }
 
 
 
@@ -71,6 +93,7 @@ export default function Hotels() {
                 <th scope="col" class="px-6 py-4 font-medium text-gray-900">Availability</th>
                 <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center">Action</th>
                 <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center">Edit</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900 text-center">Delete</th>
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 border-t border-gray-100">
@@ -101,7 +124,7 @@ export default function Hotels() {
                     </td>
                     <td class="px-6 py-4">
                         <div className="flex place-content-around gap-5">
-                            <Link  className="flex flex-col place-items-center cursor-pointer">
+                            <Link to={`/Adminsingleproperty/${property?.id}`}  className="flex flex-col place-items-center cursor-pointer">
                             <BsEye size={20}></BsEye>
                             <p className="font-semibold ">View</p>
                             </Link>
@@ -112,6 +135,12 @@ export default function Hotels() {
                             <CiEdit size={25}></CiEdit>
                         </div>
                     </td>
+                    <td class='px-6 py-4'>
+                        <div className="flex flex-col place-items-center rounded-2xl shadow-md shadow-gray-100 p-2 cursor-pointer" onClick={()=>deleteItem(property.id)}>
+                                <AiOutlineDelete size={25}></AiOutlineDelete> 
+                        </div>
+                    </td>
+                    
                 </tr>  
                 ))
             }

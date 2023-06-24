@@ -41,6 +41,7 @@ export default function Register() {
           toast.success("Account Created, Please Activate..!")
         } else {
           toast.error("Something went wrong")
+          e.target.reset()
         }
       }
       else {
